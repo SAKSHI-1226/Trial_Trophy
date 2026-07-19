@@ -2305,7 +2305,7 @@ It should feel alive, NOT like the trophy is floating.
 
     /* Anchor it to the BOTTOM */
     bottom: -10px;
-    right: 10px;
+    right: 30px;
 
     width: 830px;
     height: 540px;
@@ -2313,7 +2313,7 @@ It should feel alive, NOT like the trophy is floating.
     background: url("./images/heritage-building.png")
                 right bottom / contain no-repeat;
 
-    opacity: 0.28;
+    opacity: 0.25;
 
     filter:
         sepia(0.6)
@@ -2373,7 +2373,7 @@ mask-image:
         width: 300px;
         height: 300px;
 
-        opacity: 0.10;
+        opacity: 0.08;
     }
 
     .heritage-watermark {
