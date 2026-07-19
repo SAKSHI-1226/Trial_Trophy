@@ -1644,7 +1644,136 @@ It should feel alive, NOT like the trophy is floating.
         rgba(0,0,0,0.30);
 }
 
+/* ==========================================
+   AUDIO STATE CONTROL
+========================================== */
 
+/* Absolutely hide seek controls initially */
+.audio-seek-controls[hidden] {
+    display: none !important;
+}
+
+
+/* Seek player visible only after play */
+.audio-seek-controls {
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    width: 320px;
+    max-width: 90%;
+
+    margin: 0 auto;
+
+    padding: 10px 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(190, 145, 38, 0.7);
+
+    border-radius: 30px;
+
+    background: rgba(10, 10, 9, 0.95);
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.25),
+        inset 0 0 10px rgba(202,157,48,0.05);
+}
+
+
+/* PLAY PAUSE */
+
+.audio-seek-play {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(198,153,48,0.7);
+
+    background: transparent;
+
+    color: #d2aa4c;
+
+    cursor: pointer;
+}
+
+
+/* TIME */
+
+.audio-seek-time {
+    min-width: 32px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+
+    color: rgba(255,255,255,0.65);
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* SEEK BAR */
+
+.audio-seek-range {
+    flex: 1;
+
+    min-width: 80px;
+
+    height: 4px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border-radius: 20px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            to right,
+
+            #c59a3d 0%,
+
+            #c59a3d var(--audio-progress, 0%),
+
+            rgba(255,255,255,0.18)
+                var(--audio-progress, 0%),
+
+            rgba(255,255,255,0.18) 100%
+        );
+}
+
+
+.audio-seek-range::-webkit-slider-thumb {
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #d3aa4d;
+
+    border: 2px solid #111;
+
+    cursor: pointer;
+}
 /* =========================================================
    CONTENT ENTERING FROM HERO
 ========================================================= */
@@ -1773,7 +1902,153 @@ It should feel alive, NOT like the trophy is floating.
         rgba(60,45,25,0.07);
 }
 
+/* =========================================================
+   PREMIUM SUBTLE GOLD — KEY INFORMATION FACT CARDS
+========================================================= */
 
+.fact-card {
+    position: relative;
+    overflow: hidden;
+
+    /* Soft warm ivory with a tiny golden tint */
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 253, 247, 0.72),
+            rgba(244, 231, 195, 0.20),
+            rgba(255, 252, 244, 0.65)
+        );
+
+    /* Very fine champagne-gold edge */
+    border: 1px solid rgba(181, 139, 55, 0.24);
+
+    border-radius: 10px;
+
+    /* Tiny inner gold highlight + soft depth */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 247, 211, 0.65),
+        inset 0 0 10px rgba(196, 154, 65, 0.035),
+        0 3px 12px rgba(73, 52, 20, 0.035);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* =========================================================
+   VERY SOFT GOLDEN SHINE
+========================================================= */
+
+.fact-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: -60%;
+    left: -80%;
+
+    width: 45%;
+    height: 220%;
+
+    /*
+       Very subtle champagne light streak
+    */
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 240, 185, 0.02) 30%,
+            rgba(255, 229, 145, 0.16) 50%,
+            rgba(255, 246, 210, 0.05) 65%,
+            transparent 100%
+        );
+
+    transform: rotate(12deg);
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    transition:
+        left 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* Keep text/icons above shine */
+
+.fact-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   DESKTOP — SOFT INTERACTION
+========================================================= */
+
+@media (hover: hover) {
+
+    .fact-card:hover {
+        transform: translateY(-2px);
+
+        border-color:
+            rgba(184, 139, 48, 0.42);
+
+        box-shadow:
+            inset 0 1px 0 rgba(255, 248, 215, 0.85),
+            inset 0 0 14px rgba(198, 151, 53, 0.055),
+            0 7px 18px rgba(72, 51, 19, 0.07);
+    }
+
+    /* Shine gently passes across card */
+
+    .fact-card:hover::before {
+        left: 140%;
+    }
+}
+
+
+/* =========================================================
+   GOLDEN LABEL / ICON DETAIL
+========================================================= */
+
+.fact-card .fact-label,
+.fact-card .key-label {
+    color: #8c6a28;
+}
+
+
+/* If your existing icons use .key-icon */
+
+.fact-card .key-icon {
+    color: #a98032;
+
+    filter:
+        drop-shadow(
+            0 1px 2px rgba(181, 137, 47, 0.15)
+        );
+}
+
+
+/* =========================================================
+   MOBILE — SOFTER EFFECT
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .fact-card {
+        border-color:
+            rgba(181, 139, 55, 0.20);
+
+        box-shadow:
+            inset 0 1px 0 rgba(255, 247, 211, 0.55),
+            0 2px 8px rgba(73, 52, 20, 0.025);
+    }
+
+}
 /* =========================================================
    ICON TOUCH RESPONSE
 ========================================================= */
@@ -1953,6 +2228,7 @@ It should feel alive, NOT like the trophy is floating.
 }
 
 
+
 /* =========================================================
    REDUCED MOTION ACCESSIBILITY
 ========================================================= */
@@ -1982,571 +2258,873 @@ It should feel alive, NOT like the trophy is floating.
 
 }
 
-/* =========================================================
-   PREMIUM HERITAGE BACKGROUND DESIGN
-   Crest Watermark + Architectural Sketch
-========================================================= */
-
-
-/* =========================================================
-   CONTENT AREA
-========================================================= */
-
 .content-deck {
     position: relative;
     isolation: isolate;
-
     overflow: hidden;
-
-    /*
-       Warm museum-paper background
-    */
-    background:
-        linear-gradient(
-            180deg,
-            #f8f4eb 0%,
-            #f5efe3 55%,
-            #f2eadc 100%
-        );
 }
 
 
-/*
-Very subtle paper grain.
-*/
+/* ==============================
+   CREST - UPPER CENTER
+============================== */
 
-.content-deck::after {
-    content: "";
-
+.crest-watermark {
     position: absolute;
-    inset: 0;
+
+    top: 100px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 380px;
+    height: 380px;
+
+    background: url("./images/regiment-crest.png")
+                center / contain no-repeat;
+
+    opacity: 0.12;
+
+    filter:
+        brightness(1.15)
+        saturate(0.8)
+        sepia(0.15);
 
     pointer-events: none;
 
     z-index: 0;
-
-    opacity: 0.20;
-
-    background-image:
-        radial-gradient(
-            rgba(91, 69, 39, 0.10) 0.5px,
-            transparent 0.5px
-        );
-
-    background-size:
-        6px 6px;
 }
 
 
-/*
-All actual page content stays above backgrounds.
-*/
+/* ==============================
+   BUILDING - BOTTOM RIGHT
+============================== */
 
-.content-deck > * {
-    position: relative;
-
-    z-index: 3;
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-.summary-segment {
-    position: relative;
-
-    isolation: isolate;
-
-    overflow: visible;
-}
-
-
-
-
-/* =========================================================
-   FINAL HERITAGE BACKGROUND SYSTEM
-   1. Centered Regimental Crest behind Summary
-   2. Faded Heritage Building behind Key Information
-========================================================= */
-
-
-/* =========================================================
-   SUMMARY — CENTERED REGIMENTAL CREST
-========================================================= */
-
-.summary-segment {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-}
-
-
-/* Large centered crest watermark */
-
-.summary-segment::before {
-    content: "";
-
+.heritage-watermark {
     position: absolute;
 
-    /* Perfectly centered */
-    left: 50%;
-    top: 50%;
+    /* Anchor it to the BOTTOM */
+    bottom: -10px;
+    right: 10px;
 
-    transform: translate(-50%, -50%);
+    width: 830px;
+    height: 540px;
 
-    /* Large watermark */
-    width: 440px;
-    height: 440px;
+    background: url("./images/heritage-building.png")
+                right bottom / contain no-repeat;
 
-    /* Correct image path */
-    background-image:
-        url("./images/regiment-crest.png");
+    opacity: 0.28;
 
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-
-    /*
-       Faded museum watermark
-       Increase to 0.12 if you want it stronger
-       Reduce to 0.06 if you want it softer
-    */
-    opacity: 0.09;
-
-    /*
-       Converts colored crest into
-       subtle antique brown tone
-    */
     filter:
-        grayscale(1)
-        sepia(1)
-        saturate(0.9)
+        sepia(0.6)
+        saturate(0.65)
         contrast(0.85);
 
     pointer-events: none;
 
     z-index: 0;
+
+    /* Softly fade upper edge */
+    -webkit-mask-image:
+    radial-gradient(
+        ellipse at 55% 60%,
+
+        black 25%,
+        rgba(0,0,0,0.85) 42%,
+        rgba(0,0,0,0.50) 60%,
+        rgba(0,0,0,0.15) 75%,
+        transparent 92%
+    );
+
+mask-image:
+    radial-gradient(
+        ellipse at 55% 60%,
+
+        black 25%,
+        rgba(0,0,0,0.85) 42%,
+        rgba(0,0,0,0.50) 60%,
+        rgba(0,0,0,0.15) 75%,
+        transparent 92%
+    );
 }
 
 
-/*
-   Keep summary text above crest
-*/
+/* ==============================
+   REAL CONTENT ABOVE BACKGROUNDS
+============================== */
 
-.summary-body {
-    position: relative;
-    z-index: 2;
-
-    background: transparent;
-}
-
-
-.summary-body p {
-    position: relative;
-    z-index: 2;
-
-    background: transparent;
-}
-
-
-/* =========================================================
-   KEY INFORMATION — HERITAGE BUILDING
-========================================================= */
-
+.interactive-toggle-bar,
+.summary-segment,
 .info-segment {
     position: relative;
-
-    isolation: isolate;
-
-    overflow: hidden;
-
-    /*
-       Gives enough vertical area for the
-       building to emerge from the bottom
-    */
-    min-height: 520px;
+    z-index: 2;
 }
 
 
-/*
-   Heritage building illustration
-*/
-
-.info-segment::before {
-    content: "";
-
-    position: absolute;
-
-    /*
-       Lower-right positioning
-    */
-    right: -4%;
-    bottom: -3%;
-
-    /*
-       Large enough to feel like part
-       of the page rather than a small picture
-    */
-    width: 68%;
-    height: 65%;
-
-    background-image:
-        url("./images/heritage-building.png");
-
-    background-repeat: no-repeat;
-
-    background-position:
-        right bottom;
-
-    background-size:
-        contain;
-
-    /*
-       Building visibility
-    */
-    opacity: 0.30;
-
-    /*
-       Blend into warm museum paper
-    */
-    filter:
-        sepia(0.65)
-        saturate(0.65)
-        contrast(0.80);
-
-    pointer-events: none;
-
-    z-index: 0;
-
-
-    /*
-       Fade the TOP of the building.
-
-       Prevents it from looking like
-       a rectangular pasted photograph.
-    */
-
-    -webkit-mask-image:
-        linear-gradient(
-            to bottom,
-
-            transparent 0%,
-
-            rgba(0, 0, 0, 0.10) 8%,
-
-            rgba(0, 0, 0, 0.45) 22%,
-
-            rgba(0, 0, 0, 0.85) 42%,
-
-            black 65%
-        );
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-
-            transparent 0%,
-
-            rgba(0, 0, 0, 0.10) 8%,
-
-            rgba(0, 0, 0, 0.45) 22%,
-
-            rgba(0, 0, 0, 0.85) 42%,
-
-            black 65%
-        );
-}
-
-
-/* =========================================================
-   LEFT-SIDE FADE FOR BUILDING
-========================================================= */
-
-/*
-   This parchment gradient sits over the LEFT
-   side of the building.
-
-   Result:
-
-   TEXT → faint building → stronger building
-
-   instead of:
-
-   TEXT | rectangular building image
-*/
-
-.info-segment::after {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    bottom: 0;
-
-    width: 72%;
-    height: 68%;
-
-    background:
-        linear-gradient(
-            90deg,
-
-            #f3ecdf 0%,
-
-            rgba(243, 236, 223, 0.95) 8%,
-
-            rgba(243, 236, 223, 0.72) 24%,
-
-            rgba(243, 236, 223, 0.35) 43%,
-
-            rgba(243, 236, 223, 0.08) 65%,
-
-            transparent 82%
-        );
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-
-/* =========================================================
-   KEEP KEY INFORMATION ABOVE BUILDING
-========================================================= */
-
-.info-segment-header,
-.facts-grid-matrix {
-    position: relative;
-
-    z-index: 3;
-}
-
-
-.matrix-row-split {
-    position: relative;
-
-    z-index: 3;
-
-    background: transparent;
-}
-
-
-.fact-card {
-    position: relative;
-
-    z-index: 3;
-
-    /*
-       Mostly transparent so the heritage
-       illustration can subtly show through.
-    */
-
-    background:
-        rgba(248, 244, 235, 0.05);
-}
-
-
-.fact-meta-container,
-.key-icon {
-    position: relative;
-
-    z-index: 4;
-}
-
-
-/* =========================================================
+/* ==============================
    MOBILE
+============================== */
+
+@media (max-width: 600px) {
+
+    .crest-watermark {
+        top: 90px;
+
+        width: 300px;
+        height: 300px;
+
+        opacity: 0.10;
+    }
+
+    .heritage-watermark {
+        bottom: -5px;
+        right: -55px;
+
+        width: 430px;
+        height: 480px;
+
+        opacity: 0.25;
+    }
+}
+@media (min-width: 900px) {
+
+    .placard-wrapper {
+        width: 92%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Give content comfortable spacing on wider screens */
+    .content-deck {
+        padding-left: clamp(40px, 6vw, 85px);
+        padding-right: clamp(40px, 6vw, 85px);
+    }
+
+    /* Don't let summary paragraphs become excessively wide */
+    .summary-body {
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+/* =========================================================
+   AUDIO PLAYER
+   ORIGINAL BUTTON -> SEEK BAR -> ORIGINAL BUTTON
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   IMPORTANT
+
+   HTML "hidden" must ALWAYS hide the seek controls.
+
+   This prevents both the original button and seek bar
+   from appearing together when the page first loads.
+--------------------------------------------------------- */
+
+.audio-seek-controls[hidden] {
+
+    display: none !important;
+
+}
+
+
+/* =========================================================
+   SEEK PLAYER CONTAINER
+========================================================= */
+
+.audio-seek-controls {
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+
+    /*
+       Similar dimensions to original
+       LISTEN TO THE STORY button.
+    */
+
+    width: 330px;
+
+    max-width: 90%;
+
+
+    margin:
+
+        0
+
+        auto;
+
+
+    padding:
+
+        9px
+
+        14px;
+
+
+    box-sizing:
+
+        border-box;
+
+
+    /*
+       Premium capsule shape.
+    */
+
+    border-radius:
+
+        30px;
+
+
+    /*
+       Fine golden border matching
+       existing museum design.
+    */
+
+    border:
+
+        1px solid
+
+        rgba(
+            190,
+            145,
+            38,
+            0.72
+        );
+
+
+    /*
+       Same dark visual language
+       as hero area.
+    */
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(
+                10,
+                10,
+                9,
+                0.98
+            ),
+
+            rgba(
+                20,
+                18,
+                13,
+                0.96
+            )
+
+        );
+
+
+    /*
+       Subtle premium depth.
+    */
+
+    box-shadow:
+
+        0 5px 16px
+
+        rgba(
+            0,
+            0,
+            0,
+            0.22
+        ),
+
+        inset 0 1px 0
+
+        rgba(
+            224,
+            183,
+            83,
+            0.08
+        );
+
+
+    /*
+       Smooth appearance.
+    */
+
+    animation:
+
+        audioSeekAppear
+
+        0.28s
+
+        ease;
+
+}
+
+
+/* =========================================================
+   SEEK PLAYER APPEAR ANIMATION
+========================================================= */
+
+@keyframes audioSeekAppear {
+
+
+    from {
+
+        opacity: 0;
+
+        transform:
+
+            scale(0.97);
+
+    }
+
+
+    to {
+
+        opacity: 1;
+
+        transform:
+
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   PLAY / PAUSE BUTTON
+========================================================= */
+
+.audio-seek-play {
+
+    flex-shrink:
+
+        0;
+
+
+    width:
+
+        30px;
+
+
+    height:
+
+        30px;
+
+
+    padding:
+
+        0;
+
+
+    display:
+
+        flex;
+
+
+    align-items:
+
+        center;
+
+
+    justify-content:
+
+        center;
+
+
+    border-radius:
+
+        50%;
+
+
+    border:
+
+        1px solid
+
+        rgba(
+            198,
+            153,
+            48,
+            0.72
+        );
+
+
+    background:
+
+        rgba(
+            190,
+            145,
+            38,
+            0.06
+        );
+
+
+    color:
+
+        #d3aa4d;
+
+
+    font-size:
+
+        9px;
+
+
+    cursor:
+
+        pointer;
+
+
+    transition:
+
+        transform
+
+        0.2s
+
+        ease,
+
+        background
+
+        0.2s
+
+        ease,
+
+        box-shadow
+
+        0.2s
+
+        ease;
+
+}
+
+
+/* Desktop hover */
+
+@media (hover: hover) {
+
+
+    .audio-seek-play:hover {
+
+
+        transform:
+
+            scale(1.06);
+
+
+        background:
+
+            rgba(
+                190,
+                145,
+                38,
+                0.13
+            );
+
+
+        box-shadow:
+
+            0 0 12px
+
+            rgba(
+                196,
+                151,
+                44,
+                0.12
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   AUDIO TIME
+========================================================= */
+
+.audio-seek-time {
+
+    flex-shrink:
+
+        0;
+
+
+    min-width:
+
+        31px;
+
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+
+    font-size:
+
+        9px;
+
+
+    font-weight:
+
+        400;
+
+
+    color:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.62
+        );
+
+
+    font-variant-numeric:
+
+        tabular-nums;
+
+
+    text-align:
+
+        center;
+
+}
+
+
+/* =========================================================
+   SEEK RANGE
+========================================================= */
+
+.audio-seek-range {
+
+    flex:
+
+        1;
+
+
+    min-width:
+
+        80px;
+
+
+    height:
+
+        4px;
+
+
+    padding:
+
+        0;
+
+
+    margin:
+
+        0;
+
+
+    appearance:
+
+        none;
+
+
+    -webkit-appearance:
+
+        none;
+
+
+    border:
+
+        none;
+
+
+    border-radius:
+
+        20px;
+
+
+    outline:
+
+        none;
+
+
+    cursor:
+
+        pointer;
+
+
+    /*
+       GOLD = played portion
+
+       GREY = remaining portion
+    */
+
+    background:
+
+        linear-gradient(
+
+            to right,
+
+
+            #c59a3d
+
+            0%,
+
+
+            #c59a3d
+
+            var(
+                --audio-progress,
+                0%
+            ),
+
+
+            rgba(
+                255,
+                255,
+                255,
+                0.17
+            )
+
+            var(
+                --audio-progress,
+                0%
+            ),
+
+
+            rgba(
+                255,
+                255,
+                255,
+                0.17
+            )
+
+            100%
+
+        );
+
+}
+
+
+/* =========================================================
+   CHROME / SAFARI SEEK DOT
+========================================================= */
+
+.audio-seek-range::-webkit-slider-thumb {
+
+    appearance:
+
+        none;
+
+
+    -webkit-appearance:
+
+        none;
+
+
+    width:
+
+        12px;
+
+
+    height:
+
+        12px;
+
+
+    border-radius:
+
+        50%;
+
+
+    background:
+
+        #d3aa4d;
+
+
+    border:
+
+        2px solid
+
+        #11100d;
+
+
+    box-shadow:
+
+        0 0 5px
+
+        rgba(
+            205,
+            164,
+            69,
+            0.40
+        );
+
+
+    cursor:
+
+        grab;
+
+
+    transition:
+
+        transform
+
+        0.15s
+
+        ease;
+
+}
+
+
+.audio-seek-range::-webkit-slider-thumb:active {
+
+    cursor:
+
+        grabbing;
+
+
+    transform:
+
+        scale(1.18);
+
+}
+
+
+/* =========================================================
+   FIREFOX SEEK DOT
+========================================================= */
+
+.audio-seek-range::-moz-range-thumb {
+
+    width:
+
+        10px;
+
+
+    height:
+
+        10px;
+
+
+    border-radius:
+
+        50%;
+
+
+    background:
+
+        #d3aa4d;
+
+
+    border:
+
+        2px solid
+
+        #11100d;
+
+
+    box-shadow:
+
+        0 0 5px
+
+        rgba(
+            205,
+            164,
+            69,
+            0.40
+        );
+
+
+    cursor:
+
+        grab;
+
+}
+
+
+/* =========================================================
+   MOBILE AUDIO PLAYER
 ========================================================= */
 
 @media (max-width: 600px) {
 
 
-    /* =====================================================
-       CREST
-    ===================================================== */
-
-    .summary-segment::before {
-
-        /*
-           Large centered crest
-           behind entire Summary
-        */
-
-        width: 330px;
-        height: 330px;
-
-        left: 50%;
-        top: 50%;
-
-        right: auto;
-
-        transform:
-            translate(-50%, -50%);
-
-        /*
-           Slightly stronger because
-           phone screens are smaller
-        */
-
-        opacity: 0.10;
-
-        background-position:
-            center;
-
-        background-size:
-            contain;
-    }
-
-
-    /* =====================================================
-       KEY INFORMATION
-    ===================================================== */
-
-    .info-segment {
-
-        min-height: 620px;
-
-        /*
-           Creates room for illustration
-           toward bottom
-        */
-
-        padding-bottom: 65px;
-    }
-
-
-    /* =====================================================
-       BUILDING — MOBILE
-    ===================================================== */
-
-    .info-segment::before {
-
-        /*
-           Make building larger on phone
-           so details remain visible
-        */
-
-        width: 88%;
-        height: 52%;
-
-        right: -15%;
-        bottom: -2%;
-
-        opacity: 0.27;
-
-        background-position:
-            right bottom;
-
-        background-size:
-            contain;
+    .audio-seek-controls {
 
 
         /*
-           Smooth vertical fade
+           Fits comfortably on phones.
         */
 
-        -webkit-mask-image:
-            linear-gradient(
-                to bottom,
+        width:
 
-                transparent 0%,
-
-                rgba(0,0,0,0.08) 7%,
-
-                rgba(0,0,0,0.40) 23%,
-
-                rgba(0,0,0,0.85) 43%,
-
-                black 65%
+            min(
+                320px,
+                88vw
             );
 
-        mask-image:
-            linear-gradient(
-                to bottom,
 
-                transparent 0%,
+        gap:
 
-                rgba(0,0,0,0.08) 7%,
+            7px;
 
-                rgba(0,0,0,0.40) 23%,
 
-                rgba(0,0,0,0.85) 43%,
+        padding:
 
-                black 65%
-            );
+            8px
+
+            11px;
+
     }
 
 
-    /*
-       Left-side parchment fade
-    */
-
-    .info-segment::after {
-
-        width: 95%;
-        height: 55%;
-
-        right: 0;
-        bottom: 0;
-
-        background:
-            linear-gradient(
-                90deg,
-
-                #f3ecdf 0%,
-
-                rgba(243,236,223,0.96) 12%,
-
-                rgba(243,236,223,0.72) 30%,
-
-                rgba(243,236,223,0.30) 50%,
-
-                rgba(243,236,223,0.05) 72%,
-
-                transparent 88%
-            );
-    }
-
-}
+    .audio-seek-play {
 
 
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
+        width:
 
-@media (max-width: 420px) {
+            28px;
 
 
-    /* Crest */
+        height:
 
-    .summary-segment::before {
+            28px;
 
-        width: 290px;
-        height: 290px;
 
-        left: 50%;
-        top: 50%;
+        font-size:
 
-        right: auto;
+            8px;
 
-        transform:
-            translate(-50%, -50%);
-
-        opacity: 0.09;
     }
 
 
-    /* Building */
+    .audio-seek-time {
 
-    .info-segment::before {
 
-        width: 95%;
-        height: 48%;
+        min-width:
 
-        right: -20%;
-        bottom: -1%;
+            27px;
 
-        opacity: 0.25;
+
+        font-size:
+
+            8px;
+
+    }
+
+
+    .audio-seek-range {
+
+
+        min-width:
+
+            65px;
+
     }
 
 }
